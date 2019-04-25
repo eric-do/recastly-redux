@@ -9,8 +9,10 @@ var currentVideoReducer = (state = null, action) => {
   // Logic
   //  If the action's type is CHANGE_VIDEO, return action.video
   //  Else return state (the action type passed to the currentVideoReducer wasn't valid)
-
-  return 'CHANGE_VIDEO' === action.type ? action.video : state;
+  if (!action) {
+    throw "invalid action";
+  }
+  return action.type === 'CHANGE_VIDEO' ? action.video || null : state;
 };
 
 export default currentVideoReducer;
